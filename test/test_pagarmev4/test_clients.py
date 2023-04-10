@@ -1,6 +1,6 @@
 from src.implementations.gateway.pagarmev4.pagarme_v4 import pagarmev4
-
-print(pagarmev4.clients.create({
+def test_client_create():
+    client =pagarmev4.clients.create({
     "external_id": "#123456789",
   "name": "João das Neves",
   "type": "individual",
@@ -16,4 +16,6 @@ print(pagarmev4.clients.create({
     "+5511999999999",
     "+5511888888888"
   ],
-  "birthday": "1985-01-01"}))
+  "birthday": "1985-01-01"})
+    assert 'id' in client
+    

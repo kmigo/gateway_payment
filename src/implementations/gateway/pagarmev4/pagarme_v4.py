@@ -77,16 +77,26 @@ class ClientsPagarmeV4(Clients):
         self.root = root
 
     def create(self,data):
-        return pagarme.card.create(data)
+        return pagarme.customer.create(data)
     
     def get(self,data):
-        pass
+        return pagarme.customer.find_by(data)
     
-    def update(self,data):
-        pass
+    def update(self,id,data):
+        import requests
+        url =f'https://api.pagar.me/1/customers/{id}'
+        response = requests.request('PUT',url,json=data,headers={'content-type':'application/json'},params={**data,
+                                                                                               'api_key':self.root.key
+                                                                                                         })
+        return response.json()
     
     def all(self,data):
-        pass
+        import requests
+        url ='https://api.pagar.me/1/customers'
+        response = requests.request('GET',url,headers={'content-type':'application/json'},params={**data,
+                                                                                          'api_key':self.root.key
+                                                                                                         })
+        return response.json()
 
 
 class PagarmeGatewayV4(GatewayPayment):

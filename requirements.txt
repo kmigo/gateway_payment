@@ -1,3 +1,4 @@
 pagarme-python==4.0.2
 pydantic
 python-dotenv
+pytest
