@@ -1,23 +1,11 @@
 from src.implementations.gateway.pagarmev4.pagarme_v4 import pagarmev4
-def test_create_cards():
+
+def test_create_cards(data_card):
     
-    res = pagarmev4.cards.create({
-        "card_expiration_date": "1122", 
-    "card_number": "4018720572598048",
-    "card_cvv": "123", 
-    "card_holder_name": "Aardvark Silva"
-    })
+    res = pagarmev4.cards.create(data_card)
     assert 'id' in res
     assert 'date_created' in res
-    res = pagarmev4.cards.create({
-        "card_expiration_date": "1122", 
-    "card_number": "4018720572598048",
-    "customer_id":"13736000",
-    "card_cvv": "123", 
-    "card_holder_name": "Aardvark Silva"
-    })
-    assert 'id' in res
-    assert 'date_created' in res
+    
 
 def test_get_all_cards():
     

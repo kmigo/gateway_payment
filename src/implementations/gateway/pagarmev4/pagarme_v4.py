@@ -3,7 +3,6 @@ import pagarme
 
 class PaymentPagarmeV4(Payment):
     root:GatewayPayment
-    
     def __init__(self,root:GatewayPayment) -> None:
         super().__init__()
         self.root = root
