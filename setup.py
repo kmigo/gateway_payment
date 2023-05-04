@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 setup(
     name="gateway-payment",
-    version="1.0.1",
-    packages=["gateway_payment.src.implementations.gateway.pagarmev5","gateway_payment.src.implementations.gateway.pagarmev4"],
+    version="1.0.2",
+    packages=find_packages(),
+    package_dir={'': 'src'},
     include_package_data=True,
     description="Utilitários para gateways de pagamento",
     author="Patrick Soares",
     author_email="tk_patrick@hotmail.com",
-    package_dir={"gateway_payment": "gateway_payment.src.implementations.gateway.pagarmev5"},
     install_requires=[
         "requests",
         "pagarme-python==4.0.2",
