@@ -21,7 +21,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "fsv=main:main"
+            "gateway_payment=main:main"
         ]
     },
     python_requires=">=3.9.16",
