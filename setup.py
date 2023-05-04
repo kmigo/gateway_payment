@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 setup(
     name="gateway-payment",
-    version="0.01",
+    version="1.0.0",
     packages=["gateway_payment.src.implementations.gateway"],
     include_package_data=True,
     description="Utilitários para gateways de pagamento",
