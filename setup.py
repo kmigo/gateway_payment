@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="gateway-payment",
-    version="1.0.22",
-    packages=["gateways",],
-    package_dir={"gateways":"src/gateways"},
+    version="1.0.23",
+    packages=["gateway_payment",],
+    package_dir={"gateway_payment":""},
     include_package_data=True,
     description="Utilitários para gateways de pagamento",
     author="Patrick Soares",
