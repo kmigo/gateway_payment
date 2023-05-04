@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="gateway-payment",
-    version="1.0.20",
+    version="1.0.21",
     packages=["gateway_payment",],
     package_dir={"gateways":"src/gateways"},
     include_package_data=True,
