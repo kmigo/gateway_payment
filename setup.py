@@ -24,5 +24,5 @@ setup(
             "fsv=main:main"
         ]
     },
-    python_requires=">=3.10.6",
+    python_requires=">=3.9.16",
 )
