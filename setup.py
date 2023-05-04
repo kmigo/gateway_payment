@@ -5,7 +5,7 @@ setup(
     name="gateway-payment",
     version="1.0.18",
     packages=["gateway_payment",],
-    package_dir={"gateway_payment":"src/gateway_payment"},
+    package_dir={"gateway_payment":"src/gateways"},
     include_package_data=True,
     description="Utilitários para gateways de pagamento",
     author="Patrick Soares",
