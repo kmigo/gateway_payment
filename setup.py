@@ -2,8 +2,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="gateway_payment",
-    version="1.0.7",
+    name="gateway-payment",
+    version="1.0.8",
     packages=['gateway_payment','main','src',  'src.core', 'src.implementations', 'src.core.gateway_payment', 'src.implementations.gateway', 'src.implementations.gateway.pagarmev5'],
     package_dir={"gateway_payment":""},
     include_package_data=True,
