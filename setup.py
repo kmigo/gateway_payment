@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="gateway_payment",
-    version="1.0.3",
-    packages=find_packages,
+    version="1.0.4",
+    packages=['src',  'src.core', 'src.implementations', 'src.core.gateway_payment', 'src.implementations.gateway', 'src.implementations.gateway.pagarmev5'],
     package_dir={"gateway_payment":""},
     include_package_data=True,
     description="Utilitários para gateways de pagamento",
