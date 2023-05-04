@@ -8,7 +8,7 @@ setup(
     description="Utilitários para gateways de pagamento",
     author="Patrick Soares",
     author_email="tk_patrick@hotmail.com",
-    package_dir={"gateway_payment": ""},
+    package_dir={"gateway_payment": "./src/"},
     install_requires=[
         "requests",
         "pagarme-python==4.0.2",
