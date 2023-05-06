@@ -68,27 +68,46 @@ class CardPagarmeV5(Cards):
         return res
      
     def update(self,data):
-        pass
-
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('DELETE',self.base_url+f'/customers/{customer_id}/cards/{card_id}',headers=self.headers,json=data)
+        return res
     
     def get_card(self,data):
-        pass
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('GET',self.base_url+f'/customers/{customer_id}/cards/{card_id}',headers=self.headers)
+        return res
 
     
     def all(self,data={}):
-        pass
-
+        assert 'customer_id' in data
+        customer_id = data.pop('customer_id')
+        res = request('GET',self.base_url+f'/customers/{customer_id}/cards',headers=self.headers)
+        return res
     
     def delete(self,data):
-        pass
-
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('DELETE',self.base_url+f'/customers/{customer_id}/cards/{card_id}',headers=self.headers)
+        return res
     
     def refresh(self,data):
-        pass
-
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('POST',self.base_url+f'/customers/{customer_id}/cards/{card_id}/renew',headers=self.headers)
+        return res
     
     def token(self,data):
-        pass
+        raise NotImplemented
 
 
 class PaymentPagarmeV5(Payment):
