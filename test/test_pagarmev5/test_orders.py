@@ -16,7 +16,6 @@ def test_create_order_simple_p2p(example_order_success_p2p):
     assert 'status' in json
     assert json['status'] == 'paid'
 
-
 def test_create_order_simple_p2p_split(example_order_success_p2p_split):
     res = pagarmev5.payment.create(example_order_success_p2p_split)
     json = res.json()
@@ -24,4 +23,12 @@ def test_create_order_simple_p2p_split(example_order_success_p2p_split):
     assert 'id' in json
     assert 'status' in json
     assert json['status'] == 'paid'
+
+def test_find_by():
+    res = pagarmev5.payment.find_by({
+        "order_id":'or_7k89rVVFnvuXm9Z2'
+    })
+    json = res.json()
+    assert res.status_code == 200
+    assert 'id' in json
 

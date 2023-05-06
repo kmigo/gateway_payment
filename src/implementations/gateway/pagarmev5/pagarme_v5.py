@@ -12,9 +12,21 @@ class ReceiversPagarmev5(Receivers):
     def create(self,data):
         res = request('POST',self.base_url+f'/recipients',headers=self.headers,json=data)
         return res
-    def all(self,data):pass
-    def get(self,data):pass
-    def update(self,data):pass
+    def all(self,data):
+        assert 'size' in data
+        assert 'page' in data
+        res = request('GET',self.base_url+f'/recipients',headers=self.headers,params=data)
+        return res
+    def get(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('GET',self.base_url+f'/recipients/{recipient_id}',headers=self.headers)
+        return res
+    def update(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('PUT',self.base_url+f'/recipients/{recipient_id}',headers=self.headers,json=data)
+        return res
 
 class ClientsPagarmev5(Clients):
     root:GatewayPayment
@@ -25,9 +37,24 @@ class ClientsPagarmev5(Clients):
     def create(self,data):
         res = request('POST',self.base_url+f'/customers',headers=self.headers,json=data)
         return res
-    def all(self,data):pass
-    def get(self,data):pass
-    def update(self,data):pass
+    def all(self,data):
+        assert 'page' in data
+        assert 'size' in data
+        res = request('GET',self.base_url+f'/customers',headers=self.headers,params=data)
+        return res
+    
+    def get(self,data):
+        assert 'customer_id' in data
+        customer_id = data.pop('customer_id')
+        res = request('GET',self.base_url+f'/customers/{customer_id}',headers=self.headers)
+        return res
+    
+    def update(self,data):
+        assert 'customer_id' in data
+        customer_id = data.pop('customer_id')
+        res = request('PUT',self.base_url+f'/customers/{customer_id}',headers=self.headers,json=data)
+        return res
+        
     
 class CardPagarmeV5(Cards):
     root:GatewayPayment
@@ -41,27 +68,46 @@ class CardPagarmeV5(Cards):
         return res
      
     def update(self,data):
-        pass
-
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('DELETE',self.base_url+f'/customers/{customer_id}/cards/{card_id}',headers=self.headers,json=data)
+        return res
     
     def get_card(self,data):
-        pass
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('GET',self.base_url+f'/customers/{customer_id}/cards/{card_id}',headers=self.headers)
+        return res
 
     
     def all(self,data={}):
-        pass
-
+        assert 'customer_id' in data
+        customer_id = data.pop('customer_id')
+        res = request('GET',self.base_url+f'/customers/{customer_id}/cards',headers=self.headers)
+        return res
     
     def delete(self,data):
-        pass
-
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('DELETE',self.base_url+f'/customers/{customer_id}/cards/{card_id}',headers=self.headers)
+        return res
     
     def refresh(self,data):
-        pass
-
+        assert 'customer_id' in data
+        assert 'card_id' in data
+        customer_id = data.pop('customer_id')
+        card_id=data.pop('card_id')
+        res = request('POST',self.base_url+f'/customers/{customer_id}/cards/{card_id}/renew',headers=self.headers)
+        return res
     
     def token(self,data):
-        pass
+        raise NotImplemented
 
 
 class PaymentPagarmeV5(Payment):
@@ -75,19 +121,29 @@ class PaymentPagarmeV5(Payment):
         res = request('POST',self.base_url+'/orders',headers=self.headers,json=data)
         return res
     def capture(self,data):
-        pass
-    def find_all(self,data):pass
-    def find_by(self,data):pass
-    def find_all(self,data):pass
-    def get_all_refounds(self,data):pass
-    def refund(self,data):pass
-    def update_payment_test(self,data):pass
+        raise NotImplemented
+    def find_all(self,data):
+        raise NotImplemented
+    def find_by(self,data):
+        assert 'order_id' in data
+        order_id =data['order_id']
+        res = request('GET',self.base_url+f'/orders/{order_id}',headers=self.headers,json=data)
+        return res
+    def find_all(self,data):
+        raise NotImplemented
+    def get_all_refounds(self,data):
+        raise NotImplemented
+    def refund(self,data):
+        raise NotImplemented
+    def update_payment_test(self,data):
+        raise NotImplemented
 
 
 class PagarmeV5(GatewayPayment):
     def __init__(self) -> None:
         super().__init__()
-        key_private="sk_test_xDw9nAxfv7HVykdX"
+        import os
+        key_private=os.environ.get('payment_key')
         usrPass = bytes(f"{key_private}:",'UTF-8')
         b64Val = base64.b64encode(usrPass).decode('utf-8')
         self.headers={"Authorization": "Basic %s" % b64Val,
