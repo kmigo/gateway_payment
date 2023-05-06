@@ -1,4 +1,5 @@
-import pytest
+import pytest,os
+os.environ.setdefault('payment_key',"sk_test_xDw9nAxfv7HVykdX")
 
 
 @pytest.fixture()
@@ -20,12 +21,12 @@ def example_order_success_p2p():
                     },
                     "installments": 1,
                     "statement_descriptor": "AVENGERS",
-                    "card_id": "card_A2abjzecwupEoPJr"
+                    "card_id": "card_1xvmvoBIrXtrWJj9"
                 },
                 "payment_method": "credit_card"
             }
         ],
-        "customer_id": "cus_YB0QaMdsJ4CqQrNK"
+        "customer_id": "cus_rRQ639VsOyhwM8xk"
     }
 
 @pytest.fixture()
@@ -47,7 +48,7 @@ def example_order_success_p2p_split():
                     },
                     "installments": 1,
                     "statement_descriptor": "AVENGERS",
-                    "card_id": "card_A2abjzecwupEoPJr"
+                    "card_id": "card_1xvmvoBIrXtrWJj9"
                 },
                 "payment_method": "credit_card"
             }
@@ -61,19 +62,19 @@ def example_order_success_p2p_split():
           },
           "amount": 550,
           "type":"flat" ,# float ou percent
-          "recipient_id": "re_clh92csax0h3l019tjux0jjl2"
+          "recipient_id": "re_clhc3kxkr0fn2019tqkmr431w"
         },{
           "options": {
             "charge_processing_fee": True,
             "charge_remainder_fee": True,
             "liable": True
           },
-          "recipient_id": "re_clh92cir70h4a019tj2iagzm7",
+          "recipient_id": "re_clh90m1e10h1r019tk5fh88uk",
           "type": "flat",
           "amount": 2440
         }
       ],
-        "customer_id": "cus_YB0QaMdsJ4CqQrNK"
+        "customer_id": "cus_rRQ639VsOyhwM8xk"
     }
 
 
