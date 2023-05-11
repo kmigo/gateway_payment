@@ -40,7 +40,7 @@ class ReceiversPagarmev5(Receivers):
     def create_balance_withdrawal(self,data):
         assert 'recipient_id' in data
         recipient_id = data.pop('recipient_id')
-        res = request('POST',self.base_url+f'recipients/{recipient_id}/withdrawals',headers=self.headers,json=data)
+        res = request('POST',self.base_url+f'/recipients/{recipient_id}/withdrawals',headers=self.headers,json=data)
         return res
     def get_balance_withdrawal(self,data):
         assert 'recipient_id' in data
