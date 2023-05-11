@@ -1,5 +1,6 @@
-import pytest,os
-os.environ.setdefault('payment_key',"sk_test_xDw9nAxfv7HVykdX")
+import pytest
+import os
+os.environ.setdefault('payment_key', "sk_test_xDw9nAxfv7HVykdX")
 
 
 @pytest.fixture()
@@ -29,6 +30,7 @@ def example_order_success_p2p():
         "customer_id": "cus_rRQ639VsOyhwM8xk"
     }
 
+
 @pytest.fixture()
 def example_order_success_p2p_split():
     return {
@@ -54,26 +56,26 @@ def example_order_success_p2p_split():
             }
         ],
         "split": [
-        {
-          "options": {
-            "charge_processing_fee": False, #vai ser cobrado pelas taxas
-            "charge_remainder_fee": False, # vai receber o restante da divisao
-            "liable": False # é responsavel em caso de chargeback
-          },
-          "amount": 550,
-          "type":"flat" ,# float ou percent
-          "recipient_id": "re_clhc3kxkr0fn2019tqkmr431w"
-        },{
-          "options": {
-            "charge_processing_fee": True,
-            "charge_remainder_fee": True,
-            "liable": True
-          },
-          "recipient_id": "re_clh90m1e10h1r019tk5fh88uk",
-          "type": "flat",
-          "amount": 2440
-        }
-      ],
+            {
+                "options": {
+                    "charge_processing_fee": False,  # vai ser cobrado pelas taxas
+                    "charge_remainder_fee": False,  # vai receber o restante da divisao
+                    "liable": False  # é responsavel em caso de chargeback
+                },
+                "amount": 550,
+                "type": "flat",  # float ou percent
+                "recipient_id": "re_clhc3kxkr0fn2019tqkmr431w"
+            }, {
+                "options": {
+                    "charge_processing_fee": True,
+                    "charge_remainder_fee": True,
+                    "liable": True
+                },
+                "recipient_id": "re_clh90m1e10h1r019tk5fh88uk",
+                "type": "flat",
+                "amount": 2440
+            }
+        ],
         "customer_id": "cus_rRQ639VsOyhwM8xk"
     }
 
@@ -81,45 +83,30 @@ def example_order_success_p2p_split():
 @pytest.fixture()
 def example_order_success():
     return {
-        "customer": {
-            "phones": {
-                "home_phone": {
-                    "country_code": "55",
-                    "area_code": "21",
-                    "number": "000000000"
-                }
-            },
-            "name": "Tony Stark",
-            "email": "avengerstark@ligadajustica.com.br",
-            "type": "individual",
-            "document": "03154435026",
-            "document_type": "cpf"
-        },
-        "items": [
-            {
-                "amount": 2990,
-                "description": "Chaveiro do Tesseract",
-                "quantity": 1,
-                "code": 123
-            }
-        ],
-        "payments": [
-            {
-                "credit_card": {
-                    "card": {
-                        "number": "4000000000000010",
-                        "holder_name": "Tony Stark",
-                        "exp_month": 1,
-                        "exp_year": 25,
-                        "cvv": "351"
-                    },
-                    "installments": 1,
-                    "statement_descriptor": "AVENGERS"
-                },
-                "payment_method": "credit_card"
-            }
-        ]
+
+  "items": [
+    {
+      "amount": 2990,
+      "description": "Chaveiro do Tesseract",
+      "quantity": 1,
+      "code": "123"
     }
+  ],
+  "payments": [
+    {
+      "credit_card": {
+        "card": {
+          "cvv": "123"
+        },
+        "installments": 1,
+        "statement_descriptor": "AVENGERS",
+        "card_id": "card_1xvmvoBIrXtrWJj9"
+      },
+      "payment_method": "credit_card"
+    }
+  ],
+  "customer_id": "cus_rRQ639VsOyhwM8xk"
+}
 
 
 @pytest.fixture()
@@ -199,11 +186,36 @@ def example_create_client():
 
 
 @pytest.fixture()
+def example_update_bank_account():
+    from datetime import datetime 
+    now = datetime.now() 
+    seconds_since_midnight = int((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds())
+
+    return {
+        "recipient_id": "re_clh9aem1t00z4019tk5t4qmje",
+        "bank_account": {
+            "holder_name": "Tony Stark",
+            "holder_type": "individual",
+            "holder_document": "26224451990",
+            "bank": "342",
+            "branch_number": "1234",
+            "branch_check_digit": "6",
+            "account_number": str(seconds_since_midnight),
+            "account_check_digit": "6",
+            "type": "checking",
+            "metadata": {
+                "meta_key": "meta_value"
+            }
+        }
+    }
+
+
+@pytest.fixture()
 def example_create_card():
     return {
         "customer_id": "cus_YB0QaMdsJ4CqQrNK",
         "billing_address": {
-             "line_1": "20, Rua boa paba, vale encantado",
+            "line_1": "20, Rua boa paba, vale encantado",
             "line_2": "casa",
             "zip_code": "29113060",
             "city": "Vila Velha",

@@ -27,7 +27,43 @@ class ReceiversPagarmev5(Receivers):
         recipient_id = data.pop('recipient_id')
         res = request('PUT',self.base_url+f'/recipients/{recipient_id}',headers=self.headers,json=data)
         return res
-
+    def update_account_bank(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('PATCH',self.base_url+f'/recipients/{recipient_id}/default-bank-account',headers=self.headers,json=data)
+        return res
+    def get_balance(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('GET',self.base_url+f'/recipients/{recipient_id}/balance',headers=self.headers)
+        return res
+    def create_balance_withdrawal(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('POST',self.base_url+f'recipients/{recipient_id}/withdrawals',headers=self.headers,json=data)
+        return res
+    def get_balance_withdrawal(self,data):
+        assert 'recipient_id' in data
+        assert 'withdrawals_id' in data
+        recipient_id = data.pop('recipient_id')
+        withdrawals_id = data.pop('withdrawals_id')
+        res = request('GET',self.base_url+f'/recipients/{recipient_id}/withdrawals/{withdrawals_id}',headers=self.headers)
+        return res
+    def get_all_balance_withdrawal(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('GET',self.base_url+f'/recipients/{recipient_id}/withdrawals',headers=self.headers)
+        return res
+    def update_config_transference(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('PATCH',self.base_url+f'/recipients/{recipient_id}/transfer-settings',headers=self.headers,json=data)
+        return res
+    def update_automatic_anticipation_settings(self,data):
+        assert 'recipient_id' in data
+        recipient_id = data.pop('recipient_id')
+        res = request('PATCH',self.base_url+f'/recipients/{recipient_id}/automatic-anticipation-settings',headers=self.headers,json=data)
+        return res
 class ClientsPagarmev5(Clients):
     root:GatewayPayment
     def __init__(self,root:GatewayPayment) -> None:
