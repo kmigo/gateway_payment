@@ -7,6 +7,23 @@ def test_create_order(example_order_success):
     assert 'id' in json
     assert 'status' in json
     assert json['status'] == 'paid'
+
+def test_create_order_and_refound(example_order_success):
+    res = pagarmev5.payment.create(example_order_success)
+    json = res.json()
+    assert res.status_code == 200
+    assert 'id' in json
+    assert 'status' in json
+    assert json['status'] == 'paid'
+    
+    charge_id = json['charges'][0]['id']
+    payload = {'charge_id':charge_id}
+    res_refound = pagarmev5.payment.refund(payload)
+    json_refound = res_refound.json()
+    assert res_refound.status_code == 200
+    
+
+   
     
     
 

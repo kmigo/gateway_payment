@@ -168,7 +168,7 @@ class PaymentPagarmeV5(Payment):
 
     def refund(self,data):
         assert 'charge_id' in data
-        assert 'amount' in data
+
         charge_id = data.pop('charge_id')
         res = request('DELETE',self.base_url+f'/charges/{charge_id}',headers=self.headers,json=data)
         return res
