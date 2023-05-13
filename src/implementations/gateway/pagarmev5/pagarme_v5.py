@@ -156,23 +156,23 @@ class PaymentPagarmeV5(Payment):
     def create(self,data):
         res = request('POST',self.base_url+'/orders',headers=self.headers,json=data)
         return res
-    def capture(self,data):
-        raise NotImplemented
+
     def find_all(self,data):
-        raise NotImplemented
+        res = request('GET',self.base_url+f'/orders',headers=self.headers,query=data)
+        return res
     def find_by(self,data):
         assert 'order_id' in data
         order_id =data['order_id']
-        res = request('GET',self.base_url+f'/orders/{order_id}',headers=self.headers,json=data)
+        res = request('GET',self.base_url+f'/orders/{order_id}',headers=self.headers)
         return res
-    def find_all(self,data):
-        raise NotImplemented
-    def get_all_refounds(self,data):
-        raise NotImplemented
+
     def refund(self,data):
-        raise NotImplemented
-    def update_payment_test(self,data):
-        raise NotImplemented
+        assert 'charge_id' in data
+        assert 'amount' in data
+        charge_id = data.pop('charge_id')
+        res = request('DELETE',self.base_url+f'/charges/{charge_id}',headers=self.headers,json=data)
+        return res
+   
 
 
 class PagarmeV5(GatewayPayment):

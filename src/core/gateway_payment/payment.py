@@ -14,12 +14,3 @@ class Payment(ABC):
     @abstractclassmethod
     def find_all(self):
         pass
-    @abstractclassmethod
-    def capture(self,data):
-        pass
-    @abstractclassmethod
-    def get_all_refounds(self):
-        pass
-    @abstractclassmethod
-    def update_payment_test(id,data):
-        pass
